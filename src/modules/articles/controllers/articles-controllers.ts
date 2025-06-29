@@ -3,6 +3,7 @@ import { CreateArticle } from "../schemas/create-article-schema";
 import { UpdateArticle } from "../schemas/update-article-schema";
 import { ArticlesServices } from "../services/articles-services";
 import { UsersServices } from "../../users/services/users-services";
+import { findArticlesSchemaWithFilters } from "../schemas/find-articles-schema";
 
 export class ArticlesControllers {
   constructor(
@@ -10,9 +11,12 @@ export class ArticlesControllers {
     readonly usersServices: UsersServices
   ) {}
 
-  async findArticles(request: FastifyRequest, reply: FastifyReply) {
+  async findArticles(
+    request: FastifyRequest<{ Querystring: findArticlesSchemaWithFilters}>, 
+    reply: FastifyReply)
+ {
     try {
-      const articles = await this.articlesServices.findAll();
+      const articles = await this.articlesServices.findAll(request.query);
       return reply.code(200).send(articles);
     } catch (error) {
       console.error(error);

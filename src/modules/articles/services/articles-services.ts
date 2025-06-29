@@ -1,11 +1,22 @@
 import { prisma } from "../../../lib/prisma";
 import { CreateArticle } from "../schemas/create-article-schema";
+import { findArticlesSchemaWithFilters } from "../schemas/find-articles-schema";
 import { UpdateArticle } from "../schemas/update-article-schema";
 
 export class ArticlesServices {
   constructor() {}
-  async findAll() {
-    return await prisma.articles.findMany();
+  async findAll(filters?: findArticlesSchemaWithFilters) {
+    if(!filters)  return await prisma.articles.findMany();
+
+    const { title, content, author_id } = filters;
+
+      return await prisma.articles.findMany({
+        where: {
+          title: title ? { contains: title, mode: 'insensitive' } : undefined,
+          content: content ? { contains: content, mode: 'insensitive' } : undefined,
+          author_id: author_id ? author_id : undefined,
+        },
+      });
   }
 
   async find(articleId: string) {

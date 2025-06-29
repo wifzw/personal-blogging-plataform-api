@@ -11,4 +11,12 @@ export const findArticlesSchema = z.array(
   })
 );
 
+export const filtersArticlesSchema = z.object({
+  title: z.string().optional(),
+  content: z.string().optional(),
+  author_id: z.string().uuid().optional(),
+});
+
+export type findArticlesSchemaWithFilters = z.infer<typeof filtersArticlesSchema>;
+
 export type findArticles = z.infer<typeof findArticlesSchema>;
