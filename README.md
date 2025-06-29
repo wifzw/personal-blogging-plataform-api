@@ -21,6 +21,12 @@ NPM
 npm install
 ```
 
+## Banco de Dados (Postgres)
+Docker
+```sh
+docker compose up -d
+```
+
 ## Migração Banco de Dados
 Yarn
 ```sh
