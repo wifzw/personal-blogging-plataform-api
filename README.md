@@ -48,12 +48,8 @@ npm run dev
 http://localhost:3000/docs
 ```
 
-## Author
+## Autor
 
 👤 **wifz**
 
 * Github: [@wifzw](https://github.com/wifzw)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
